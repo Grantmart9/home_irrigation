@@ -35,7 +35,7 @@ export const TopBar = ({ handleBurger, handleCart, handleLogin }) => {
             sx={{ color: pageHeading, flexGrow: 1, fontFamily: fontType }}
           >
             <div className="flex text-md align-center justify-center">
-              KALOS
+              Home AI
             </div>
           </Typography>
           <Button onClick={handleLogin} sx={{ mr: 1, color: buttonColor }}>

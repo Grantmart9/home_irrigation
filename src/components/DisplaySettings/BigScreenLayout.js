@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { useState } from "react";
 import Button from "@mui/material/Button";
-import { About } from "UserPages/About";
+import { Irrigation } from "UserPages/Irrigation";
 import { Contact } from "UserPages/Contact";
 import { Products } from "UserPages/Products";
 import { Cart } from "UserSecuredPages/Cart";
@@ -25,12 +25,12 @@ const cookies = new Cookies();
 /*This needs to be */
 const menuItems = [
   { name: "Products", path: "/products" },
-  { name: "About", path: "/about" },
+  { name: "Irrigation", path: "/irrigation" },
   { name: "Contact", path: "/contact" },
 ];
 const RegisteredMenuItems = [
   { name: "Products", path: "/products" },
-  { name: "About", path: "/about" },
+  { name: "Irrigation", path: "/irrigation" },
   { name: "Contact", path: "/contact" },
   { name: "Orders", path: "/orders" },
   { name: "My Cart", path: "/cart" },
@@ -87,8 +87,8 @@ const ScreenLayoutInner = ({ setJWT }) => {
       className="rounded shadow-md h-screen w-screen p-2 mt-1 ml-1"
     >
       <Switch>
-        <Route path="/about">
-          <About />
+        <Route path="/irrigation">
+          <Irrigation />
         </Route>
         <Route path="/products">
           <Products />
