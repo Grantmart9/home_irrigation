@@ -12,7 +12,7 @@ import axios from "axios";
 export const Irrigation = () => {
   const handleStart = () => {
     axios
-      .get("http://192.168.8.124/app/start_manual")
+      .get("http://192.168.8.124/app/start")
       .then(function (response) {
         console.log(response);
       })
