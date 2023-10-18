@@ -142,7 +142,7 @@ export const BigScreenLayout = ({
         handleLogin={handleLogin}
         handleBurger={handleBurger}
       />
-      <div className="flex" style={{ marginTop: "5rem" }}>
+      <div className="flex" style={{ marginTop: "4rem" }}>
         {open ? <SideNavBig handleClick={handleClick} jwt={jwt} /> : null}
         <ScreenLayoutInner setJWT={setJWT} />
       </div>
