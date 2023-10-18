@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   buttonColor,
   layoutColor,
@@ -8,13 +8,20 @@ import { API_IP } from "components/API/API";
 import { Size } from "media-query";
 import { Button } from "@mui/material";
 import axios from "axios";
+import { TextField } from "@material-ui/core";
 
 /*hello*/
 
 export const Irrigation = () => {
+  const [bleed, setBleed] = useState(20);
+  const [period, setPeriod] = useState(30);
+
   const handleStart = () => {
     axios
-      .get("http://192.168.8.124/app/start")
+      .post("http://192.168.8.124/app/start", {
+        period: period,
+        bleed_period: bleed,
+      })
       .then(function (response) {
         console.log(response);
       })
@@ -22,9 +29,16 @@ export const Irrigation = () => {
         console.log(error);
       });
   };
+
+  const handleChangeBleed = (e) => {
+    setBleed(e.target.value);
+  };
+  const handleChangePeriod = (e) => {
+    setPeriod(e.target.value);
+  };
   const handleStop = () => {
     axios
-      .get("http://192.168.8.124/app/stop")
+      .post("http://192.168.8.124/app/stop")
       .then(function (response) {
         console.log(response);
       })
@@ -57,18 +71,38 @@ export const Irrigation = () => {
           Irrigation
         </div>
       )}
-      <div className="grid grid-cols-2">
+      <div className="grid grid-cols-3">
         <div className="flex align-center justify-center">
           <Button
-            sx={{ background: "#34eb6b",color:"black", mt: 3, mx: "auto" }}
+            sx={{ background: "#34eb6b", color: "black", mt: 3, mx: "auto" }}
             onClick={handleStart}
           >
             Start
           </Button>
         </div>
         <div className="flex align-center justify-center">
+          <TextField
+            sx={{ color: buttonColor }}
+            onChange={handleChangePeriod}
+            sucess
+            variant="outlined"
+            fullWidth="true"
+            id="outlined-error-helper-text"
+            label="Period"
+          ></TextField>
+          <TextField
+            sx={{ color: buttonColor }}
+            onChange={handleChangeBleed}
+            sucess
+            variant="outlined"
+            fullWidth="true"
+            id="outlined-error-helper-text"
+            label="Bleed Period"
+          ></TextField>
+        </div>
+        <div className="flex align-center justify-center">
           <Button
-            sx={{ background: "#b50909",color:"white", mt: 3, mx: "auto" }}
+            sx={{ background: "#b50909", color: "white", mt: 3, mx: "auto" }}
             onClick={handleStop}
           >
             Stop
