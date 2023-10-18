@@ -80,7 +80,7 @@ export const Irrigation = () => {
             Start
           </Button>
         </div>
-        <div className="flex align-center justify-center">
+        <div>
           <TextField
             sx={{ color: buttonColor }}
             onChange={handleChangePeriod}

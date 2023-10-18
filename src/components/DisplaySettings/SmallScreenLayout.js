@@ -141,7 +141,7 @@ export const SmallScreenLayout = ({
         handleBurger={handleBurger}
       />
       {open ? (
-        <div style={{ marginTop: "5rem" }}>
+        <div style={{ marginTop: "3rem" }}>
           <SideNavSmall handleClick={handleClick} jwt={jwt} />
         </div>
       ) : (
