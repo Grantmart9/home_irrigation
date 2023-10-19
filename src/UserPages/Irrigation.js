@@ -10,7 +10,56 @@ import { Button } from "@mui/material";
 import axios from "axios";
 import { TextField } from "@material-ui/core";
 
-/*hello*/
+const Manual = ({
+  handleChangeBleed,
+  handleChangePeriod,
+  handleStart,
+  handleStop,
+}) => {
+  return (
+    <div className="shadow-md rounded-md p-3">
+      <div className="flex align-center justify-center font-bold">Manual</div>
+      <div className="grid grid-cols-3">
+        <div className="flex align-center justify-center">
+          <Button
+            sx={{ background: "#34eb6b", color: "black", mt: 3, mx: "auto" }}
+            onClick={handleStart}
+          >
+            Start
+          </Button>
+        </div>
+        <div className="grid grid-rows-2 gap-3">
+          <TextField
+            sx={{ color: buttonColor }}
+            onChange={handleChangePeriod}
+            sucess
+            variant="outlined"
+            fullWidth="true"
+            id="outlined-error-helper-text"
+            label="Period"
+          />
+          <TextField
+            sx={{ color: buttonColor }}
+            onChange={handleChangeBleed}
+            sucess
+            variant="outlined"
+            fullWidth="true"
+            id="outlined-error-helper-text"
+            label="Bleed Period"
+          />
+        </div>
+        <div className="flex align-center justify-center">
+          <Button
+            sx={{ background: "#b50909", color: "white", mt: 3, mx: "auto" }}
+            onClick={handleStop}
+          >
+            Stop
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export const Irrigation = () => {
   const [bleed, setBleed] = useState(20);
@@ -71,44 +120,12 @@ export const Irrigation = () => {
           Irrigation
         </div>
       )}
-      <div className="grid grid-cols-3">
-        <div className="flex align-center justify-center">
-          <Button
-            sx={{ background: "#34eb6b", color: "black", mt: 3, mx: "auto" }}
-            onClick={handleStart}
-          >
-            Start
-          </Button>
-        </div>
-        <div>
-          <TextField
-            sx={{ color: buttonColor }}
-            onChange={handleChangePeriod}
-            sucess
-            variant="outlined"
-            fullWidth="true"
-            id="outlined-error-helper-text"
-            label="Period"
-          ></TextField>
-          <TextField
-            sx={{ color: buttonColor }}
-            onChange={handleChangeBleed}
-            sucess
-            variant="outlined"
-            fullWidth="true"
-            id="outlined-error-helper-text"
-            label="Bleed Period"
-          ></TextField>
-        </div>
-        <div className="flex align-center justify-center">
-          <Button
-            sx={{ background: "#b50909", color: "white", mt: 3, mx: "auto" }}
-            onClick={handleStop}
-          >
-            Stop
-          </Button>
-        </div>
-      </div>
+      <Manual
+        handleChangeBleed={handleChangeBleed}
+        handleChangePeriod={handleChangePeriod}
+        handleStart={handleStart}
+        handleStop={handleStop}
+      />
     </div>
   );
 };
