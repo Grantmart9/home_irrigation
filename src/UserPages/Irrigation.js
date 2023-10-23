@@ -14,6 +14,7 @@ const States = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     setLoading(true);
@@ -29,7 +30,12 @@ const States = () => {
         setLoading(false);
         setError(error.message);
       });
-  }, []);
+    const timer = setTimeout(() => {
+      const counter = count + 1;
+      setCount(counter);
+    }, 10000);
+    return () => clearTimeout(timer);
+  }, [count]);
 
   const onColor = "#1f4ea1";
   const offColor = "#5e6e8a";
