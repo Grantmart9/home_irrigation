@@ -18,7 +18,7 @@ const States = () => {
 
   useEffect(() => {
     setLoading(true);
-   /* window.scrollTo({ top: 0, left: 0, behavior: "smooth" });*/
+    /* window.scrollTo({ top: 0, left: 0, behavior: "smooth" });*/
     axios
       .get("http://192.168.8.124/app/valves", {})
       .then(function (response) {
@@ -44,7 +44,9 @@ const States = () => {
     <>
       {data != null ? (
         <div className="bg-white rounded shadow-md p-2">
-          <div className="flex align-center justify-center">Valve status</div>
+          <div className="flex align-center justify-center font-bold mb-2 text-lg">
+            Valve status
+          </div>
           <div className="grid grid-cols-6 mb-4">
             {data.valve_status.map((object, i) => (
               <div className="flex align-center justify-center" key={i}>
