@@ -11,23 +11,66 @@ import axios from "axios";
 import { TextField } from "@material-ui/core";
 
 const States = () => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState();
+  const [error, setError] = useState();
+
+  useEffect(() => {
+    setLoading(true);
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    axios
+      .get("http://192.168.8.124/app/valves", {})
+      .then(function (response) {
+        setData(response.data);
+        setLoading(false);
+      })
+      .catch(function (error) {
+        setError("Request Error !!!");
+        setLoading(false);
+        setError(error.message);
+      });
+  }, []);
+
+  const onColor = "#1f4ea1";
+  const offColor = "#5e6e8a";
+
   return (
-    <div className="bg-white rounded shadow-md p-2">
-      <div className="grid grid-rows-2 gap-2">
-        <div className="grid grid-cols-2">
-          <div className="flex font-bold align-center justify-center">
-            Status
-          </div>
-          <div className="flex align-center font-bold  justify-center">
-            Mode
+    <>
+      {data != null ? (
+        <div className="bg-white rounded shadow-md p-2">
+          <div className="flex align-center justify-center">Valve status</div>
+          <div className="grid grid-cols-6 mb-4">
+            {data.valve_status.map((object, i) => (
+              <div className="flex align-center justify-center" key={i}>
+                {object.state ? (
+                  <Button
+                    sx={{
+                      background: onColor,
+                      color: "white",
+                      mt: 3,
+                      mx: "auto",
+                    }}
+                  >
+                    {object.valve}
+                  </Button>
+                ) : (
+                  <Button
+                    sx={{
+                      background: offColor,
+                      color: "white",
+                      mt: 3,
+                      mx: "auto",
+                    }}
+                  >
+                    {object.valve}
+                  </Button>
+                )}
+              </div>
+            ))}
           </div>
         </div>
-        <div className="grid grid-cols-2">
-          <div className="flex  align-center justify-center">Running</div>
-          <div className="flex align-center justify-center">Auto</div>
-        </div>
-      </div>
-    </div>
+      ) : null}
+    </>
   );
 };
 
@@ -222,7 +265,7 @@ const Schedule = ({
                     <TextField
                       sx={{ color: buttonColor }}
                       value={starts}
-                      variant = "outlined"
+                      variant="outlined"
                       fullWidth="false"
                     />
                   </div>
