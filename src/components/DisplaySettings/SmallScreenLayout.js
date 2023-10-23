@@ -69,7 +69,7 @@ const SideNavSmall = ({ handleClick, jwt }) => {
     <>
       <div
         style={{ backgroundColor: layoutColor, minWidth: "300px" }}
-        className="rounded shadow-md mt-1 h-screen"
+        className="rounded shadow-md mt-1 h-full"
       >
         <div className="flex align-center justify-center">
           <SideNavInner handleClick={handleClick} jwt={jwt} />
@@ -83,7 +83,7 @@ const ScreenLayoutInner = ({ setJWT }) => {
   return (
     <div
       style={{ backgroundColor: layoutColor, fontFamily: fontType }}
-      className="rounded shadow-md h-screen w-screen p-2 mt-1 ml-1"
+      className="rounded shadow-md h-full w-screen p-2 mt-1 ml-1"
     >
       <Switch>
         <Route path="/irrigation">

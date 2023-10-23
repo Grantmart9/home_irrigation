@@ -42,8 +42,7 @@ const SideNavInner = ({ handleClick, jwt }) => {
   console.log(jwt);
   if (jwt) {
     Menu = RegisteredMenuItems;
-  }
-   else {
+  } else {
     Menu = menuItems;
   }
   return (
@@ -67,16 +66,14 @@ const SideNavInner = ({ handleClick, jwt }) => {
 
 const SideNavBig = ({ handleClick, jwt }) => {
   return (
-    <>
-      <div
-        style={{ backgroundColor: layoutColor, minWidth: "300px" }}
-        className="rounded shadow-md mt-1"
-      >
-        <div className="flex align-center justify-center">
-          <SideNavInner handleClick={handleClick} jwt={jwt} />
-        </div>
+    <div
+      style={{ backgroundColor: layoutColor, minWidth: "300px" }}
+      className="rounded shadow-md mt-1"
+    >
+      <div className="flex align-center justify-center">
+        <SideNavInner handleClick={handleClick} jwt={jwt} />
       </div>
-    </>
+    </div>
   );
 };
 
@@ -84,7 +81,7 @@ const ScreenLayoutInner = ({ setJWT }) => {
   return (
     <div
       style={{ backgroundColor: layoutColor, fontFamily: fontType }}
-      className="rounded shadow-md h-screen w-screen p-2 mt-1 ml-1"
+      className="rounded shadow-md w-screen p-2 mt-1 ml-1"
     >
       <Switch>
         <Route path="/irrigation">
@@ -128,7 +125,7 @@ export const BigScreenLayout = ({
 }) => {
   var JWT_State = false;
   var jwt_avail = cookies.get("Token");
-  if (jwt_avail != '') {
+  if (jwt_avail != "") {
     JWT_State = true;
   } else {
     JWT_State = false;
