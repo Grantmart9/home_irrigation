@@ -18,7 +18,7 @@ const States = () => {
 
   useEffect(() => {
     setLoading(true);
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+   /* window.scrollTo({ top: 0, left: 0, behavior: "smooth" });*/
     axios
       .get("http://192.168.8.124/app/valves", {})
       .then(function (response) {
@@ -33,7 +33,7 @@ const States = () => {
     const timer = setTimeout(() => {
       const counter = count + 1;
       setCount(counter);
-    }, 10000);
+    }, 5000);
     return () => clearTimeout(timer);
   }, [count]);
 
