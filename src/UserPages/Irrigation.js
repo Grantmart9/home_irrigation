@@ -8,6 +8,7 @@ import { API_IP } from "components/API/API";
 import { Size } from "media-query";
 import { Button } from "@mui/material";
 import axios from "axios";
+import Loading from "images/Loading.gif";
 import { TextField } from "@material-ui/core";
 
 const States = () => {
@@ -33,12 +34,27 @@ const States = () => {
     const timer = setTimeout(() => {
       const counter = count + 1;
       setCount(counter);
-    }, 5000);
+    }, 10000);
     return () => clearTimeout(timer);
   }, [count]);
 
   const onColor = "#1f4ea1";
   const offColor = "#5e6e8a";
+
+  if (loading && data != null) {
+    return (
+      <div>
+        <div className="bg-white rounded shadow-md p-2">
+          <div className="flex align-center justify-center font-bold mb-2 text-lg">
+            Valve status
+          </div>
+          <div className="flex align-center justify-center">
+            <img width={100} height={100} src={Loading} />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -94,14 +110,12 @@ const Pool_fill = ({
         Pool Fill
       </div>
       <div className="grid grid-cols-3">
-        <div className="flex align-center justify-center">
-          <Button
-            sx={{ background: "#34eb6b", color: "black", mt: 3, mx: "auto" }}
-            onClick={handleFill}
-          >
-            Fill
-          </Button>
-        </div>
+        <Button
+          sx={{ background: "#34eb6b", color: "black", marginRight: "2rem" }}
+          onClick={handleFill}
+        >
+          Fill
+        </Button>
         <div className="grid grid-rows-2 gap-3">
           <TextField
             sx={{ color: buttonColor }}
@@ -122,14 +136,12 @@ const Pool_fill = ({
             label="Bleed Period"
           />
         </div>
-        <div className="flex align-center justify-center">
-          <Button
-            sx={{ background: "#b50909", color: "white", mt: 3, mx: "auto" }}
-            onClick={handleStop}
-          >
-            Stop Fill
-          </Button>
-        </div>
+        <Button
+          sx={{ background: "#b50909", color: "white", marginLeft: "2rem" }}
+          onClick={handleStop}
+        >
+          Stop Fill
+        </Button>
       </div>
     </div>
   );
@@ -147,14 +159,12 @@ const Manual = ({
         Manual Control
       </div>
       <div className="grid grid-cols-3">
-        <div className="flex align-center justify-center">
-          <Button
-            sx={{ background: "#34eb6b", color: "black", mt: 3, mx: "auto" }}
-            onClick={handleStart}
-          >
-            Start
-          </Button>
-        </div>
+        <Button
+          sx={{ background: "#34eb6b", color: "black", marginRight: "2rem" }}
+          onClick={handleStart}
+        >
+          Start
+        </Button>
         <div className="grid grid-rows-2 gap-3">
           <TextField
             sx={{ color: buttonColor }}
@@ -175,14 +185,12 @@ const Manual = ({
             label="Bleed Period"
           />
         </div>
-        <div className="flex align-center justify-center">
-          <Button
-            sx={{ background: "#b50909", color: "white", mt: 3, mx: "auto" }}
-            onClick={handleStop}
-          >
-            Stop
-          </Button>
-        </div>
+        <Button
+          sx={{ background: "#b50909", color: "white", marginLeft: "2rem" }}
+          onClick={handleStop}
+        >
+          Stop
+        </Button>
       </div>
     </div>
   );
@@ -361,18 +369,20 @@ export const Irrigation = () => {
         </div>
       )}
       <States />
-      <Pool_fill
-        handleFill={handleFill}
-        handleChangeBleed={handleChangeBleed}
-        handleChangePeriod={handleChangePeriod}
-        handleStop={handleStop}
-      />
-      <Manual
-        handleChangeBleed={handleChangeBleed}
-        handleChangePeriod={handleChangePeriod}
-        handleStart={handleStart}
-        handleStop={handleStop}
-      />
+      <div className="grid grid-cols-2 gap-1">
+        <Pool_fill
+          handleFill={handleFill}
+          handleChangeBleed={handleChangeBleed}
+          handleChangePeriod={handleChangePeriod}
+          handleStop={handleStop}
+        />
+        <Manual
+          handleChangeBleed={handleChangeBleed}
+          handleChangePeriod={handleChangePeriod}
+          handleStart={handleStart}
+          handleStop={handleStop}
+        />
+      </div>
       <Schedule />
       <Auto />
     </div>
