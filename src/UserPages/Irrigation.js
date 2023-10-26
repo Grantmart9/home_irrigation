@@ -105,7 +105,7 @@ const Pool_fill = ({
   handleStop,
 }) => {
   return (
-    <div className="shadow-md rounded-md p-3">
+    <div className="shadow-md rounded-md p-5">
       <div className="flex align-center justify-center font-bold mb-2 text-lg">
         Pool Fill
       </div>
@@ -154,7 +154,7 @@ const Manual = ({
   handleStop,
 }) => {
   return (
-    <div className="shadow-md rounded-md p-3">
+    <div className="shadow-md rounded-md p-5">
       <div className="flex align-center justify-center font-bold mb-2 text-lg">
         Manual Control
       </div>
@@ -369,20 +369,37 @@ export const Irrigation = () => {
         </div>
       )}
       <States />
-      <div className="grid grid-cols-2 gap-1">
-        <Pool_fill
-          handleFill={handleFill}
-          handleChangeBleed={handleChangeBleed}
-          handleChangePeriod={handleChangePeriod}
-          handleStop={handleStop}
-        />
-        <Manual
-          handleChangeBleed={handleChangeBleed}
-          handleChangePeriod={handleChangePeriod}
-          handleStart={handleStart}
-          handleStop={handleStop}
-        />
-      </div>
+      {size == "MD" || size == "SM" || size == "XS" ? (
+        <div className="grid grid-rows-2 gap-1">
+          <Pool_fill
+            handleFill={handleFill}
+            handleChangeBleed={handleChangeBleed}
+            handleChangePeriod={handleChangePeriod}
+            handleStop={handleStop}
+          />
+          <Manual
+            handleChangeBleed={handleChangeBleed}
+            handleChangePeriod={handleChangePeriod}
+            handleStart={handleStart}
+            handleStop={handleStop}
+          />
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 gap-1">
+          <Pool_fill
+            handleFill={handleFill}
+            handleChangeBleed={handleChangeBleed}
+            handleChangePeriod={handleChangePeriod}
+            handleStop={handleStop}
+          />
+          <Manual
+            handleChangeBleed={handleChangeBleed}
+            handleChangePeriod={handleChangePeriod}
+            handleStart={handleStart}
+            handleStop={handleStop}
+          />
+        </div>
+      )}
       <Schedule />
       <Auto />
     </div>
