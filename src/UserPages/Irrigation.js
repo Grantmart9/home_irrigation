@@ -312,7 +312,13 @@ const Schedule = ({
               <div className="grid grid-rows-1 gap-1">
                 {today.start_times.map((starts, i) => (
                   <div key={i}>
-                    <div className="flex align-center justify-center p-2">
+                    <div className="grid grid-cols-2 gap-1 p-2">
+                      <TextField
+                        sx={{ color: buttonColor }}
+                        value={i+1}
+                        variant="outlined"
+                        fullWidth="false"
+                      />
                       <TextField
                         sx={{ color: buttonColor }}
                         value={starts}
