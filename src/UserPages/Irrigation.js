@@ -214,6 +214,7 @@ const Schedule = ({
   handleChangePeriod,
   handleStart,
   handleStop,
+  size,
 }) => {
   const day = [
     "monday",
@@ -259,38 +260,73 @@ const Schedule = ({
       <div className="flex align-center justify-center font-bold mb-2 text-lg">
         Scheduled Control
       </div>
-      <div className="grid grid-cols-7">
-        {start_times.map((today, i) => (
-          <div>
-            <div key={i} className="flex align-center justify-center">
-              <Button
-                sx={{
-                  background: "#34eb6b",
-                  color: "black",
-                  mt: 3,
-                  mx: "auto",
-                }}
-              >
-                {today.day}
-              </Button>
-            </div>
-            <div className="grid grid-rows-1 gap-1">
-              {today.start_times.map((starts, i) => (
-                <div key={i}>
-                  <div className="flex align-center justify-center p-2">
-                    <TextField
-                      sx={{ color: buttonColor }}
-                      value={starts}
-                      variant="outlined"
-                      fullWidth="false"
-                    />
+      {size == "MD" || size == "SM" || size == "XS" ? (
+        <div className="grid grid-rows-7">
+          {start_times.map((today, i) => (
+            <div>
+              <div key={i} className="flex align-center justify-center">
+                <Button
+                  sx={{
+                    background: "#34eb6b",
+                    color: "black",
+                    mt: 3,
+                    mx: "auto",
+                  }}
+                >
+                  {today.day}
+                </Button>
+              </div>
+              <div className="grid grid-rows-1 gap-1">
+                {today.start_times.map((starts, i) => (
+                  <div key={i}>
+                    <div className="flex align-center justify-center p-2">
+                      <TextField
+                        sx={{ color: buttonColor }}
+                        value={starts}
+                        variant="outlined"
+                        fullWidth="false"
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div className="grid grid-cols-7">
+          {start_times.map((today, i) => (
+            <div>
+              <div key={i} className="flex align-center justify-center">
+                <Button
+                  sx={{
+                    background: "#34eb6b",
+                    color: "black",
+                    mt: 3,
+                    mx: "auto",
+                  }}
+                >
+                  {today.day}
+                </Button>
+              </div>
+              <div className="grid grid-rows-1 gap-1">
+                {today.start_times.map((starts, i) => (
+                  <div key={i}>
+                    <div className="flex align-center justify-center p-2">
+                      <TextField
+                        sx={{ color: buttonColor }}
+                        value={starts}
+                        variant="outlined"
+                        fullWidth="false"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
@@ -400,7 +436,7 @@ export const Irrigation = () => {
           />
         </div>
       )}
-      <Schedule />
+      <Schedule size={size} />
       <Auto />
     </div>
   );
