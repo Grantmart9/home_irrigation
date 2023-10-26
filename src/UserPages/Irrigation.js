@@ -282,6 +282,12 @@ const Schedule = ({
                     <div className="flex align-center justify-center p-2">
                       <TextField
                         sx={{ color: buttonColor }}
+                        value={i + 1}
+                        variant="outlined"
+                        fullWidth="false"
+                      />
+                      <TextField
+                        sx={{ color: buttonColor }}
                         value={starts}
                         variant="outlined"
                         fullWidth="false"
@@ -315,7 +321,7 @@ const Schedule = ({
                     <div className="grid grid-cols-2 gap-1 p-2">
                       <TextField
                         sx={{ color: buttonColor }}
-                        value={i+1}
+                        value={i + 1}
                         variant="outlined"
                         fullWidth="false"
                       />
