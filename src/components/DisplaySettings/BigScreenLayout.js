@@ -2,15 +2,10 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { useState } from "react";
 import Button from "@mui/material/Button";
-import { Irrigation } from "UserPages/Irrigation";
-import { Contact } from "UserPages/Contact";
-import { Products } from "UserPages/Products";
-import { Cart } from "UserSecuredPages/Cart";
-import { Login } from "UserPages/Login";
-import { Register } from "UserPages/Register";
-import { Settings } from "UserSecuredPages/Settings";
-import { Orders } from "UserSecuredPages/Orders";
-import Loading from "images/Loading.gif";
+import { Irrigation } from "Pages/Irrigation";
+import { Water } from "Pages/Water";
+import { Power } from "Pages/Power";
+import Loading from "images/loading.gif";
 import {
   buttonColor,
   layoutColor,
@@ -24,30 +19,15 @@ const cookies = new Cookies();
 
 /*This needs to be */
 const menuItems = [
-  { name: "Products", path: "/products" },
   { name: "Irrigation", path: "/irrigation" },
-  { name: "Contact", path: "/contact" },
-];
-const RegisteredMenuItems = [
-  { name: "Products", path: "/products" },
-  { name: "Irrigation", path: "/irrigation" },
-  { name: "Contact", path: "/contact" },
-  { name: "Orders", path: "/orders" },
-  { name: "My Cart", path: "/cart" },
-  { name: "settings", path: "/settings" },
+  { name: "Power Usage", path: "/power" },
+  { name: "Water Usage", path: "/water" },
 ];
 
 const SideNavInner = ({ handleClick, jwt }) => {
-  var Menu;
-  console.log(jwt);
-  if (jwt) {
-    Menu = RegisteredMenuItems;
-  } else {
-    Menu = menuItems;
-  }
   return (
     <div className="grid grid-rows-4 gap-2 p-2 mt-5">
-      {Menu.map((item) => (
+      {menuItems.map((item) => (
         <Button
           onClick={handleClick}
           size="large"
@@ -87,29 +67,11 @@ const ScreenLayoutInner = ({ setJWT }) => {
         <Route path="/irrigation">
           <Irrigation />
         </Route>
-        <Route path="/products">
-          <Products />
+        <Route path="/power">
+          <Power />
         </Route>
-        <Route path="/contact">
-          <Contact />
-        </Route>
-        <Route path="/cart">
-          <Cart />
-        </Route>
-        <Route path="/login">
-          <Login setJWT={setJWT} />
-        </Route>
-        <Route path="/register">
-          <Register />
-        </Route>
-        <Route path="/register">
-          <Register />
-        </Route>
-        <Route path="/orders">
-          <Orders />
-        </Route>
-        <Route path="/settings">
-          <Settings />
+        <Route path="/water">
+          <Water />
         </Route>
       </Switch>
     </div>

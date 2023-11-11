@@ -3,7 +3,7 @@ import { buttonColor, layoutColor, pageHeading } from "components/DisplaySetting
 import { API_IP } from "components/API/API";
 import { Size } from "media-query";
 
-export const Contact = () => {
+export const Water = () => {
   const size = Size();
   useEffect(() => {
     // 👇️ scroll to top on page load
@@ -16,14 +16,14 @@ export const Contact = () => {
           style={{ color: pageHeading, marginTop: "15%" }}
           className="text-xl flex align-center justify-center mb-2 p-2 w-full"
         >
-          Contact
+          Water
         </div>
       ) : (
         <div
           style={{ color: pageHeading, marginTop: "1pt" }}
           className="text-xl flex align-center justify-center mb-2 p-2 w-full"
         >
-          Contact
+          Water
         </div>
       )}
     </div>

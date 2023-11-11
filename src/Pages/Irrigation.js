@@ -8,7 +8,7 @@ import { API_IP } from "components/API/API";
 import { Size } from "media-query";
 import { Button } from "@mui/material";
 import axios from "axios";
-import Loading from "images/Loading.gif";
+import Loading from "images/loading.gif";
 import { TextField } from "@material-ui/core";
 
 const States = () => {
