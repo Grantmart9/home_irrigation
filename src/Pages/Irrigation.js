@@ -21,7 +21,7 @@ const States = () => {
     setLoading(true);
     /* window.scrollTo({ top: 0, left: 0, behavior: "smooth" });*/
     axios
-      .get("http://192.168.8.124/app/valves", {})
+      .get("http://100.78.84.143/app/valves", {})
       .then(function (response) {
         setData(response.data);
         setLoading(false);
@@ -349,7 +349,7 @@ export const Irrigation = () => {
 
   const handleStart = () => {
     axios
-      .post("http://192.168.8.124/app/start", {
+      .post("http://100.78.84.143/app/start", {
         period: period,
         bleed_period: bleed,
       })
@@ -363,7 +363,7 @@ export const Irrigation = () => {
 
   const handleFill = () => {
     axios
-      .post("http://192.168.8.124/app/fill_pool", {
+      .post("http://100.78.84.143/app/fill_pool", {
         period: period,
         bleed_period: bleed,
       })
@@ -383,7 +383,7 @@ export const Irrigation = () => {
   };
   const handleStop = () => {
     axios
-      .post("http://192.168.8.124/app/stop")
+      .post("http://100.78.84.143/app/stop")
       .then(function (response) {
         console.log(response);
       })
