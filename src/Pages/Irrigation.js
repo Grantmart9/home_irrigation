@@ -34,7 +34,7 @@ const States = () => {
     const timer = setTimeout(() => {
       const counter = count + 1;
       setCount(counter);
-    }, 10000);
+    }, 5000);
     return () => clearTimeout(timer);
   }, [count]);
 
