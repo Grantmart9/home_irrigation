@@ -44,7 +44,7 @@ const States = () => {
   if (loading && data != null) {
     return (
       <div>
-        <div className="bg-white rounded shadow-md p-2">
+        <div className="bg-white rounded shadow-md p-2 w-screen">
           <div className="flex align-center justify-center font-bold mb-2 text-lg">
             Valve status
           </div>
@@ -59,11 +59,11 @@ const States = () => {
   return (
     <>
       {data != null ? (
-        <div className="bg-white rounded shadow-md p-2">
+        <div className="bg-white rounded shadow-md p-2 w-screen">
           <div className="flex align-center justify-center font-bold mb-2 text-lg">
             Valve status
           </div>
-          <div className="grid grid-cols-6 mb-4">
+          <div className="grid grid-cols-6 gap-1 mb-4">
             {data.valve_status.map((object, i) => (
               <div className="flex align-center justify-center" key={i}>
                 {object.state ? (
@@ -343,6 +343,110 @@ const Schedule = ({
   );
 };
 
+const Mode = () => {
+  return (
+    <div className="bg-white rounded shadow-md p-3">
+      <div className="flex align-center justify-center font-bold mb-2 text-lg">Mode</div>
+      <div className="grid grid-rows-3">
+        <Button
+          sx={{
+            background: "#34eb6b",
+            color: "black",
+            mt: 3,
+            mx: "auto",
+          }}
+          fullWidth="true"
+        >
+          Manual
+        </Button>
+        <Button
+          sx={{
+            background: "#bff5d1",
+            color: "black",
+            mt: 3,
+            mx: "auto",
+          }}
+          fullWidth="true"
+        >
+          AI
+        </Button>
+        <Button
+          sx={{
+            background: "#bff5d1",
+            color: "black",
+            mt: 3,
+            mx: "auto",
+          }}
+          fullWidth="true"
+        >
+          Scheduled
+        </Button>
+      </div>
+    </div>
+  );
+};
+const Pool = () => {
+  return (
+    <div className="bg-white rounded shadow-md p-3">
+      <div className="flex align-center justify-center font-bold mb-2 text-lg">Pool</div>
+      <Button
+        sx={{
+          background: "#1b97b3",
+          color: "black",
+          mt: 3,
+          mx: "auto",
+        }}
+        fullWidth="true"
+      >
+        Fill
+      </Button>
+    </div>
+  );
+};
+
+const Manual_mode = () => {
+  return (
+    <div className="bg-white rounded shadow-md p-3">
+      <div className="flex align-center justify-center font-bold mb-2 text-lg">Manual</div>
+      <div className="grid grid-rows-2">
+        <Button
+          sx={{
+            background: "#34eb6b",
+            color: "black",
+            mt: 3,
+            mx: "auto",
+          }}
+          fullWidth="true"
+        >
+          Start
+        </Button>
+        <Button
+          sx={{
+            background: "#b51f2e",
+            color: "white",
+            mt: 3,
+            mx: "auto",
+          }}
+          fullWidth="true"
+        >
+          Stop
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+const Dashboard = () => {
+  return (
+    <div className="flex flex-grow-1">
+      <Mode />
+      <Pool />
+      <Manual_mode/>
+      <States />
+    </div>
+  );
+};
+
 export const Irrigation = () => {
   const [bleed, setBleed] = useState(20);
   const [period, setPeriod] = useState(30);
@@ -416,38 +520,7 @@ export const Irrigation = () => {
           Irrigation
         </div>
       )}
-      <States />
-      {size == "MD" || size == "SM" || size == "XS" ? (
-        <div className="grid grid-rows-2 gap-1">
-          <Pool_fill
-            handleFill={handleFill}
-            handleChangeBleed={handleChangeBleed}
-            handleChangePeriod={handleChangePeriod}
-            handleStop={handleStop}
-          />
-          <Manual
-            handleChangeBleed={handleChangeBleed}
-            handleChangePeriod={handleChangePeriod}
-            handleStart={handleStart}
-            handleStop={handleStop}
-          />
-        </div>
-      ) : (
-        <div className="grid grid-cols-2 gap-1">
-          <Pool_fill
-            handleFill={handleFill}
-            handleChangeBleed={handleChangeBleed}
-            handleChangePeriod={handleChangePeriod}
-            handleStop={handleStop}
-          />
-          <Manual
-            handleChangeBleed={handleChangeBleed}
-            handleChangePeriod={handleChangePeriod}
-            handleStart={handleStart}
-            handleStop={handleStop}
-          />
-        </div>
-      )}
+      <Dashboard />
       <Schedule size={size} />
       <Auto />
     </div>
