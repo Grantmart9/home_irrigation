@@ -53,7 +53,7 @@ const States = () => {
     const timer = setTimeout(() => {
       const counter = count + 1;
       setCount(counter);
-    }, 5000);
+    }, 7000);
     return () => clearTimeout(timer);
   }, [count]);
 
@@ -62,8 +62,8 @@ const States = () => {
 
   if (loading && data != null) {
     return (
-      <div>
-        <div className="bg-white rounded shadow-md p-2 h-full">
+      <div >
+        <div className="bg-white rounded shadow-md h-full p-2">
           <div className="flex align-center justify-center font-bold mb-2 text-lg">
             Valve status
           </div>
@@ -105,9 +105,9 @@ const States = () => {
   }
 
   return (
-    <>
+    <div >
       {data != null ? (
-        <div className="bg-white rounded shadow-md p-2">
+        <div  className="bg-white rounded shadow-md h-full p-2">
           <div className="flex align-center justify-center font-bold mb-2 text-lg">
             Valve status
           </div>
@@ -140,12 +140,12 @@ const States = () => {
               </div>
             ))}
           </div>
-          <Box sx={{ width: "100%" }}>
-            <LinearProgressWithLabel className="h-5" value={progress} />
+          <Box sx={{ width: "100%", marginBottom:"1.55cm",marginTop:"1cm" }}>
+            <LinearProgressWithLabel value={progress} />
           </Box>
         </div>
       ) : null}
-    </>
+    </div>
   );
 };
 
