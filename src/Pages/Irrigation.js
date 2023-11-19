@@ -482,6 +482,7 @@ const Dashboard_large = ({
 }) => {
   return (
     <div className="flex flex-grow-1">
+      <States />
       <Mode />
       <Pool handleFill={handleFill} />
       <Manual_mode
@@ -490,7 +491,6 @@ const Dashboard_large = ({
         handleChangeBleed={handleChangeBleed}
         handleChangePeriod={handleChangePeriod}
       />
-      <States />
     </div>
   );
 };
@@ -504,6 +504,7 @@ const Dashboard_small = ({
 }) => {
   return (
     <div className="Grid grid-rows-3 gap-2">
+      <States />
       <Mode />
       <Pool handleFill={handleFill} />
       <Manual_mode
@@ -512,7 +513,6 @@ const Dashboard_small = ({
         handleChangeBleed={handleChangeBleed}
         handleChangePeriod={handleChangePeriod}
       />
-      <States />
     </div>
   );
 };
