@@ -62,7 +62,7 @@ const States = () => {
 
   if (loading && data != null) {
     return (
-      <div >
+      <div>
         <div className="bg-white rounded shadow-md h-full p-2">
           <div className="flex align-center justify-center font-bold mb-2 text-lg">
             Valve status
@@ -105,9 +105,9 @@ const States = () => {
   }
 
   return (
-    <div >
+    <div>
       {data != null ? (
-        <div  className="bg-white rounded shadow-md h-full p-2">
+        <div className="bg-white rounded shadow-md h-full p-2">
           <div className="flex align-center justify-center font-bold mb-2 text-lg">
             Valve status
           </div>
@@ -140,7 +140,7 @@ const States = () => {
               </div>
             ))}
           </div>
-          <Box sx={{ width: "100%", marginBottom:"1.55cm",marginTop:"1cm" }}>
+          <Box sx={{ width: "100%", marginBottom: "1.55cm", marginTop: "1cm" }}>
             <LinearProgressWithLabel value={progress} />
           </Box>
         </div>
@@ -198,7 +198,7 @@ const Pool_fill = ({
   );
 };
 
-const Auto = () => {
+const Ai = () => {
   return (
     <div className="shadow-md rounded-md p-3">
       <div className="flex align-center justify-center font-bold mb-2 text-lg">
@@ -345,7 +345,7 @@ const Schedule = ({
   );
 };
 
-const Mode = () => {
+const Mode = ({ handleManual, handleAi, handleSchedule }) => {
   return (
     <div className="bg-white rounded shadow-md p-3 min-w-min">
       <div className="flex align-center justify-center font-bold mb-2 text-lg">
@@ -359,6 +359,7 @@ const Mode = () => {
             mt: 3,
             mx: "auto",
           }}
+          onClick={handleManual}
           fullWidth="true"
         >
           Manual
@@ -370,6 +371,7 @@ const Mode = () => {
             mt: 3,
             mx: "auto",
           }}
+          onClick={handleAi}
           fullWidth="true"
         >
           AI
@@ -381,6 +383,7 @@ const Mode = () => {
             mt: 3,
             mx: "auto",
           }}
+          onClick={handleSchedule}
           fullWidth="true"
         >
           Scheduled
@@ -417,13 +420,26 @@ const Manual_mode = ({
   handleChangePeriod,
   handleStart,
   handleStop,
+  handleUnwanted,
 }) => {
   return (
     <div className="bg-white rounded shadow-md p-3">
       <div className="flex align-center justify-center font-bold mb-2 text-lg">
         Manual
       </div>
-      <div className="grid grid-rows-4 p-2">
+      <div className="grid grid-rows-5 p-2">
+        <Button
+          sx={{
+            background: "#f5a442",
+            color: "black",
+            mb: 3,
+            mx: "auto",
+          }}
+          onClick={handleUnwanted}
+          fullWidth="true"
+        >
+          Unwanted
+        </Button>
         <Button
           sx={{
             background: "#34eb6b",
@@ -436,7 +452,6 @@ const Manual_mode = ({
         >
           Start
         </Button>
-
         <TextField
           sx={{ color: buttonColor }}
           onChange={handleChangePeriod}
@@ -479,17 +494,26 @@ const Dashboard_large = ({
   handleChangeBleed,
   handleChangePeriod,
   handleFill,
+  handleAi,
+  handleManual,
+  handleSchedule,
+  handleUnwanted,
 }) => {
   return (
     <div className="flex flex-grow-1">
       <States />
-      <Mode />
+      <Mode
+        handleAi={handleAi}
+        handleManual={handleManual}
+        handleSchedule={handleSchedule}
+      />
       <Pool handleFill={handleFill} />
       <Manual_mode
         handleStart={handleStart}
         handleStop={handleStop}
         handleChangeBleed={handleChangeBleed}
         handleChangePeriod={handleChangePeriod}
+        handleUnwanted={handleUnwanted}
       />
     </div>
   );
@@ -501,17 +525,26 @@ const Dashboard_small = ({
   handleChangeBleed,
   handleChangePeriod,
   handleFill,
+  handleAi,
+  handleManual,
+  handleSchedule,
+  handleUnwanted,
 }) => {
   return (
     <div className="Grid grid-rows-3 gap-2">
       <States />
-      <Mode />
+      <Mode
+        handleAi={handleAi}
+        handleManual={handleManual}
+        handleSchedule={handleSchedule}
+      />
       <Pool handleFill={handleFill} />
       <Manual_mode
         handleStart={handleStart}
         handleStop={handleStop}
         handleChangeBleed={handleChangeBleed}
         handleChangePeriod={handleChangePeriod}
+        handleUnwanted={handleUnwanted}
       />
     </div>
   );
@@ -520,6 +553,7 @@ const Dashboard_small = ({
 export const Irrigation = () => {
   const [bleed, setBleed] = useState(20);
   const [period, setPeriod] = useState(30);
+  const [mode, setMode] = useState("manual");
 
   const handleStart = () => {
     axios
@@ -549,6 +583,20 @@ export const Irrigation = () => {
       });
   };
 
+  const handleUnwanted = () => {
+    axios
+      .post("http://100.78.84.143/app/go", {
+        period: 60,
+        bleed_period: 30
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   const handleChangeBleed = (e) => {
     setBleed(e.target.value);
   };
@@ -561,6 +609,39 @@ export const Irrigation = () => {
       .then(function (response) {
         console.log(response);
       })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+  const handleAi = () => {
+    setMode("ai");
+    axios
+      .post("http://100.78.84.143/app/mode", {
+        mode: "ai",
+      })
+      .then(function (response) {})
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+  const handleManual = () => {
+    setMode("manual");
+    axios
+      .post("http://100.78.84.143/app/mode", {
+        mode: "manual",
+      })
+      .then(function (response) {})
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+  const handleSchedule = () => {
+    setMode("schedule");
+    axios
+      .post("http://100.78.84.143/app/mode", {
+        mode: "schedule",
+      })
+      .then(function (response) {})
       .catch(function (error) {
         console.log(error);
       });
@@ -591,21 +672,53 @@ export const Irrigation = () => {
         </div>
       )}
       {size == "MD" || size == "SM" || size == "XS" ? (
-        <Dashboard_small
-          handleStart={handleStart}
-          handleStop={handleStop}
-          handleChangeBleed={handleChangeBleed}
-          handleChangePeriod={handleChangePeriod}
-          handleFill={handleFill}
-        />
+        <div>
+          <Dashboard_small
+            handleStart={handleStart}
+            handleStop={handleStop}
+            handleChangeBleed={handleChangeBleed}
+            handleChangePeriod={handleChangePeriod}
+            handleFill={handleFill}
+            handleAi={handleAi}
+            handleManual={handleManual}
+            handleSchedule={handleSchedule}
+            handleUnwanted={handleUnwanted}
+          />
+          {(() => {
+            switch (mode) {
+              case "ai":
+                return <Ai />;
+              case "manual":
+                return <></>;
+              case "schedule":
+                return <Schedule />;
+            }
+          })()}
+        </div>
       ) : (
-        <Dashboard_large
-          handleStart={handleStart}
-          handleStop={handleStop}
-          handleChangeBleed={handleChangeBleed}
-          handleChangePeriod={handleChangePeriod}
-          handleFill={handleFill}
-        />
+        <div>
+          <Dashboard_large
+            handleStart={handleStart}
+            handleStop={handleStop}
+            handleChangeBleed={handleChangeBleed}
+            handleChangePeriod={handleChangePeriod}
+            handleFill={handleFill}
+            handleAi={handleAi}
+            handleManual={handleManual}
+            handleSchedule={handleSchedule}
+            handleUnwanted={handleUnwanted}
+          />
+          {(() => {
+            switch (mode) {
+              case "ai":
+                return <Ai />;
+              case "manual":
+                return <></>;
+              case "schedule":
+                return <Schedule />;
+            }
+          })()}
+        </div>
       )}
     </div>
   );
